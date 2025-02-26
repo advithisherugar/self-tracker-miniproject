@@ -1,8 +1,22 @@
+*{
+    color:white;
+}
+.text1{
+    color:navy
+}
+.hed{
+    color:white
+}
+.mlg{
+    width: 523px;
+    height: 95px;
+    margin:10px 615px
+}
 body {
     font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
-    
+    background-color: #160e29;
     background-size: cover;
     color: #374375;
 }
@@ -24,7 +38,7 @@ main {
 }
 
 h1, h2 {
-    color: #895159;
+    color:#c800ff;
     font-weight: 600;
 }
 
