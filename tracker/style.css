@@ -1,6 +1,37 @@
 *{
     color:white;
+    font-family: "Atkinson Hyperlegible Mono", serif;
+    font-optical-sizing: auto;
+    font-weight: 200;
+    font-style: normal;
 }
+.start-btn{
+    display: block;
+    height: auto;
+    width: 5%;
+    margin:auto;
+}
+body::before{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+.int{
+    margin:-50px 2px;
+}
+.flg{
+    display: block;
+    height: auto;
+    width: 20%;
+    margin: auto;
+}
+.section{
+    font-family: "Atkinson Hyperlegible Mono", serif;
+    font-optical-sizing: auto;
+    font-weight: 200;
+    font-style: normal;
+}
+
 .text1{
     color:navy
 }
@@ -8,9 +39,12 @@
     color:white
 }
 .mlg{
-    width: 523px;
-    height: 95px;
-    margin:10px 615px
+    display: block;
+    height: auto;
+    width: 20%;
+    margin:auto;
+    
+
 }
 body {
     font-family: 'Arial', sans-serif;
@@ -38,7 +72,7 @@ main {
 }
 
 h1, h2 {
-    color:#c800ff;
+    color:#8a8889;
     font-weight: 600;
 }
 
@@ -71,7 +105,8 @@ h1 {
 
 .section {
     display: none;
-    width: 100%;
+    width: 27%;
+
 }
 
 .section.active {
@@ -106,8 +141,9 @@ input[type="submit"] {
     padding: 12px;
     margin: 10px 0;
     border-radius: 6px;
-    border: 1px solid #ddd;
+    border: 4px solid #b3b38c;
     box-sizing: border-box;
+    color: black;
 }
 
 input[type="submit"] {
@@ -117,7 +153,7 @@ input[type="submit"] {
 }
 
 input[type="submit"]:hover {
-    background-color: #374375;
+    background-color: #7e85a2;
 }
 
 ul {
