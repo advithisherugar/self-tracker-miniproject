@@ -1,0 +1,272 @@
+*{
+    color:white;
+    font-family: "Atkinson Hyperlegible Mono", serif;
+    font-optical-sizing: auto;
+    font-weight: 200;
+    font-style: normal;
+}
+.start-btn{
+    display: block;
+    height: auto;
+    width: 5%;
+    margin:auto;
+}
+body::before{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+.int{
+    margin:-50px 2px;
+}
+.flg{
+    display: block;
+    height: auto;
+    width: 20%;
+    margin: auto;
+}
+.section{
+    font-family: "Atkinson Hyperlegible Mono", serif;
+    font-optical-sizing: auto;
+    font-weight: 200;
+    font-style: normal;
+}
+
+.text1{
+    color:navy
+}
+.hed{
+    color:white
+}
+.mlg{
+    display: block;
+    height: auto;
+    width: 20%;
+    margin:auto;
+    
+
+}
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #160e29;
+    background-size: cover;
+    color: #374375;
+}
+
+//header {
+    background-color: #895159;
+    color: rgb(203, 181, 181);
+    padding: 20px;
+    text-align: center;
+    border-bottom: 3px solid #babde2;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    flex-direction: column;
+}
+
+h1, h2 {
+    color:#8a8889;
+    font-weight: 600;
+}
+
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+/* Navigation Buttons */
+.nav-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.nav-buttons button {
+    padding: 10px 20px;
+    background-color: #374375;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.nav-buttons button:hover {
+    background-color: #babde2;
+}
+
+.section {
+    display: none;
+    width: 27%;
+
+}
+
+.section.active {
+    display: block;
+}
+
+.form-container {
+    max-width: 600px;
+    width: 100%;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+}
+
+.form-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+label {
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="date"],
+input[type="submit"] {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 6px;
+    border: 4px solid #b3b38c;
+    box-sizing: border-box;
+    color: black;
+}
+
+input[type="submit"] {
+    background-color: #374375;
+    color: white;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: #7e85a2;
+}
+
+ul {
+    padding-left: 0;
+    list-style-type: none;
+}
+
+li {
+    background-color: #f1f1f1;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.goal-completed {
+    background-color: #c8e6c9;
+    text-decoration: line-through;
+    color: #374375;
+}
+
+.remove-button {
+    background-color: #895159;
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.remove-button:hover {
+    background-color: #374375;
+}
+
+.progress-bar {
+    height: 10px;
+    background-color: #374375;
+    border-radius: 5px;
+    margin-top: 5px;
+    width: 100%;
+}
+
+.progress-bar span {
+    height: 100%;
+    background-color: #374375;
+    border-radius: 5px;
+}
+
+.progress-container {
+    width: 100%;
+    margin-top: 10px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    main {
+        padding: 10px;
+    }
+
+    .form-container {
+        padding: 20px;
+    }
+}
+
+
+
+.progress-container {
+    width: 80%;
+    background-color: #ddd;
+    border-radius: 25px;
+    margin: auto;
+    overflow: hidden;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.progress-bar {
+    height: 30px;
+    width: 0%;
+    background: linear-gradient(90deg, #4CAF50, #8BC34A);
+    text-align: center;
+    line-height: 30px;
+    color: white;
+    font-weight: bold;
+    border-radius: 25px;
+    transition: width 0.4s ease-in-out, background-color 0.4s ease-in-out;
+}
+
+button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 5px;
+    transition: background-color 0.3s ease-in-out;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+.progress-container {
+    width: 90%; /* Adjust width for all screens */
+    max-width: 500px; /* Prevent it from becoming too wide on big screens */
+}
+
+button {
+    width: 80%;
+    max-width: 300px;
+    font-size: 16px;
+}
+
