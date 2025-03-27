@@ -5,6 +5,7 @@
     font-weight: 200;
     font-style: normal;
 }
+
 .start-btn{
     display: block;
     height: auto;
@@ -16,6 +17,16 @@ body::before{
     height: 100%;
     width: 100%;
 }
+#mascot {
+    position: fixed; /* Keep it in place even when scrolling */
+    bottom: 20px; /* Push it slightly up from the bottom */
+    left: 20px; /* Align it to the left */
+    width: 80px; /* Adjust size as needed */
+    height: auto;
+    z-index: 999; /* Ensure it's above other elements */
+    pointer-events: none; /* Prevent it from blocking clicks on sidebar */
+}
+
 .int{
     margin:-50px 2px;
 }

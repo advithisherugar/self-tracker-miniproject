@@ -1,182 +1,231 @@
-// Data Arrays
-const goals = JSON.parse(localStorage.getItem("goals")) || [];
-const progressData = JSON.parse(localStorage.getItem("progressData")) || [];
-
-// DOM References
-const goalForm = document.getElementById("goalForm");
-const progressForm = document.getElementById("progressForm");
-const goalList = document.getElementById("goalList");
-const progressList = document.getElementById("progressList");
-const goalProgressChart = document.getElementById('goalProgressChart');
-const quoteSection = document.getElementById("quoteSection");
-
-// Show/Hiding Sections
-function showSection(sectionId) {
-    const sections = document.querySelectorAll('.section');
-    sections.forEach(section => section.classList.remove('active'));
-    document.getElementById(sectionId).classList.add('active');
+// Load total points from localStorage
+if (!localStorage.getItem("totalPoints")) {
+    localStorage.setItem("totalPoints", "0");
 }
 
-// Save data to localStorage
+let totalPoints = parseInt(localStorage.getItem("totalPoints")) || 0;
+const goals = JSON.parse(localStorage.getItem("goals")) || [];
+
+// DOM Elements
+const totalPointsDisplay = document.getElementById("totalPointsDisplay");
+const taskInput = document.getElementById("taskInput");
+const taskList = document.getElementById("taskList");
+const completedTasksList = document.getElementById("completedTasksList");
+const progressBar = document.getElementById("progressBar");
+const progressText = document.getElementById("progressText");
+const resetButton = document.getElementById("resetPointsButton");
+
+// Maximum progress limit
+const maxPoints = 500;
+
+// Function to play sound effect
+function playCompletionSound() {
+    const audio = new Audio("point-sound.mp3"); // Ensure correct path
+    audio.volume = 0.5;
+    audio.play();
+}
+
+// Function to save data to localStorage
 function saveToLocalStorage() {
     localStorage.setItem("goals", JSON.stringify(goals));
-    localStorage.setItem("progressData", JSON.stringify(progressData));
+    localStorage.setItem("totalPoints", totalPoints.toString());
 }
 
-// Function to display goals
-function updateGoalList() {
-    goalList.innerHTML = "";
-    goals.forEach((goal, index) => {
+// Function to display total points
+function displayTotalPoints() {
+    totalPointsDisplay.textContent = totalPoints;
+}
+
+// Function to update the progress bar
+function updateProgressBar() {
+    const progress = Math.min((totalPoints / maxPoints) * 100, 100);
+    progressBar.style.transition = "width 0.5s ease-in-out";
+    progressBar.style.width = `${progress}%`;
+    progressText.textContent = `${totalPoints} / ${maxPoints}`;
+
+    if (totalPoints >= 500) {
+        showBadge();
+    } else {
+        hideBadge(); // Hide badge if points are below 500
+    }
+}
+
+// Function to mark task as completed and update points
+function completeTask(index) {
+    if (!goals[index].completed) {
+        goals[index].completed = true;
+        totalPoints += 10;
+        saveToLocalStorage();
+        updateTaskList();
+        displayTotalPoints();
+        updateProgressBar();
+        playPointEffect();
+        playCompletionSound();
+    }
+}
+
+// Function to add a task
+function addTask() {
+    const taskName = taskInput.value.trim();
+    if (taskName === "") return;
+
+    const newTask = { name: taskName, completed: false };
+    goals.push(newTask);
+    saveToLocalStorage();
+    updateTaskList();
+    taskInput.value = "";
+}
+
+// Add event listener to task input for Enter key
+taskInput.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
+        addTask();
+    }
+});
+
+// Function to update task list
+function updateTaskList() {
+    taskList.innerHTML = "";
+    completedTasksList.innerHTML = "";
+
+    goals.forEach((task, index) => {
         const li = document.createElement("li");
-       // li.textContent = goal.name + ' - ' + goal.category + ' - Target: ' + goal.target + ' by ' + goal.date;
-        li.textContent = `${goal.name} - ${goal.category} - Target: ${goal.target} by ${goal.date}`;
-        if (goal.completed) {
-            li.classList.add("goal-completed");
-            li.textContent += " (Completed)";
+        li.textContent = task.name;
+
+        if (task.completed) {
+            li.classList.add("completed");
+            completedTasksList.appendChild(li);
+        } else {
+            const completeButton = document.createElement("button");
+            completeButton.textContent = "Complete";
+            completeButton.onclick = () => completeTask(index);
+            li.appendChild(completeButton);
+            taskList.appendChild(li);
         }
+
         const removeButton = document.createElement("button");
         removeButton.textContent = "Remove";
-        removeButton.classList.add("remove-button");
         removeButton.onclick = () => {
             goals.splice(index, 1);
             saveToLocalStorage();
-            updateGoalList();
+            updateTaskList();
         };
         li.appendChild(removeButton);
-        goalList.appendChild(li);
     });
 }
 
-// Function to display progress
-function updateProgressList() {
-    progressList.innerHTML = "";
-    progressData.forEach((entry) => {
-        const li = document.createElement("li");
-        li.textContent = entry.task + ' - ' + entry.progress + '%';
-     // li.textContent = '${entry.task} - ${entry.progress}%';
-        progressList.appendChild(li);
-    });
-}
-
-// Form submission to add goals
-goalForm.addEventListener("submit", function(event) {
-    event.preventDefault();
-    const goalName = document.getElementById("goalName").value;
-    const goalTarget = document.getElementById("goalTarget").value;
-    const goalDate = document.getElementById("goalDate").value;
-    const category = document.getElementById("category").value;
-
-    const newGoal = {
-        name: goalName,
-        target: goalTarget,
-        date: goalDate,
-        category: category,
-        completed: false
-    };
-
-    goals.push(newGoal);
-    saveToLocalStorage();
-    updateGoalList();
-    goalForm.reset();
+// Function to reset points
+resetButton.addEventListener("click", () => {
+    totalPoints = 0;
+    localStorage.setItem("totalPoints", "0");
+    displayTotalPoints();
+    updateProgressBar();
+    hideBadge(); // ✅ Hide badge when resetting points
 });
 
-// Form submission to add progress
-progressForm.addEventListener("submit", function(event) {
-    event.preventDefault();
-    const task = document.getElementById("task").value;
-    const progress = document.getElementById("progress").value;
+// Function to create explosion effect
+function playPointEffect() {
+    console.log("Particle effect triggered!");
 
-    const newProgress = {
-        task: task,
-        progress: progress
-    };
+    for (let i = 0; i < 15; i++) {
+        const particle = document.createElement("div");
+        particle.className = "particle";
+        document.body.appendChild(particle);
 
-    progressData.push(newProgress);
-    saveToLocalStorage();
-    updateProgressList();
-    updateProgressChart();
-    progressForm.reset();
-});
+        const xMove = (Math.random() - 0.5) * 200;
+        const yMove = (Math.random() - 0.5) * 200;
 
-// Update chart
-function updateProgressChart() {
-    const ctx = goalProgressChart.getContext('2d');
-    const goalNames = goals.map(goal => goal.name);
-    const goalProgress = goals.map(goal => {
-        return progressData.reduce((total, entry) => {
-            return total + (entry.task === goal.name ? parseInt(entry.progress) : 0);
-        }, 0);
-    });
+        const rect = totalPointsDisplay.getBoundingClientRect();
+        particle.style.left = `${rect.left + rect.width / 2}px`;
+        particle.style.top = `${rect.top + rect.height / 2}px`;
 
-    new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: goalNames,
-            datasets: [{
-                label: 'Progress (%)',
-                data: goalProgress,
-                backgroundColor: 'BABDE2',
-                borderColor: 'BABDE2',
-                borderWidth: 1
-            }]
-        },
-        options: {
-            responsive: true,
-            scales: {
-                x: {
-                    title: {
-                        display: true,
-                        text: 'Goals'
-                    }
-                },
-                y: {
-                    title: {
-                        display: true,
-                        text: 'Progress (%)'
-                    },
-                    min: 0,
-                    max: 100
-                }
-            }
-        }
-    });
+        particle.animate([
+            { transform: `translate(0, 0) scale(1)`, opacity: 1 },
+            { transform: `translate(${xMove}px, ${yMove}px) scale(0)`, opacity: 0 }
+        ], {
+            duration: 1000,
+            easing: "ease-out",
+            fill: "forwards"
+        });
+
+        setTimeout(() => particle.remove(), 1000);
+    }
 }
 
-// Display motivational quote
-const quotes = [
-    "Nature has given us all the pieces required to achieve exceptional wellness and health, but has left it to us to put these pieces together.",
-    "Goal setting is the secret to a compelling future.",
-    "Either you run the day or the day runs you.",
-    "The best way to predict the future is to create it."
-];
+// Function to show badge when reaching 500 points
+function showBadge() {
+    let badgeContainer = document.querySelector(".badge-container");
 
-function displayRandomQuote() {
-    const quote = quotes[Math.floor(Math.random() * quotes.length)];
-   quoteSection.innerText = `"${quote}"`;
+    // Create badge container if it doesn't exist
+    if (!badgeContainer) {
+        badgeContainer = document.createElement("div");
+        badgeContainer.className = "badge-container";
+        badgeContainer.style.position = "absolute";
+        badgeContainer.style.top = "10px";
+        badgeContainer.style.right = "285px";
+        badgeContainer.style.zIndex = "1000";
+        badgeContainer.style.background = "rgba(0, 0, 0, 0)";
+        badgeContainer.style.padding = "10px";
+        badgeContainer.style.borderRadius = "10px";
+        document.body.appendChild(badgeContainer);
+
+        const canvas = document.createElement("canvas");
+        canvas.id = "badgeCanvas";
+        canvas.width = 120;
+        canvas.height = 120;
+        badgeContainer.appendChild(canvas);
+    }
+
+    let canvas = document.getElementById("badgeCanvas");
+    let ctx = canvas.getContext("2d");
+
+    // Clear canvas
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Draw the golden circle
+    ctx.fillStyle = "gold";
+    ctx.beginPath();
+    ctx.arc(60, 60, 50, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Draw the border
+    ctx.strokeStyle = "#ffcc00";
+    ctx.lineWidth = 5;
+    ctx.stroke();
+
+    // Draw text
+    ctx.fillStyle = "#fff";
+    ctx.font = "bold 16px Arial";
+    ctx.textAlign = "center";
+    ctx.fillText("Good Job", 60, 65);
+}
+
+// Function to hide badge when resetting points
+function hideBadge() {
+    let badgeContainer = document.querySelector(".badge-container");
+    if (badgeContainer) {
+        badgeContainer.remove(); // ✅ Badge is removed when points reset
+    }
+}
+
+// Function to update progress
+function updateProgress() {
+    totalPointsDisplay.textContent = totalPoints;
+    progressText.textContent = `${totalPoints} / 500`;
+
+    let percentage = Math.min((totalPoints / 500) * 100, 100);
+    progressBar.style.width = percentage + "%";
+
+    if (totalPoints >= 500) {
+        showBadge();
+    } else {
+        hideBadge(); // ✅ Hide badge when points are below 500
+    }
 }
 
 // Initial Load
-displayRandomQuote();
-showSection('setGoals');
-updateGoalList();
-updateProgressList();
-updateProgressChart();
-
-
-let progress = 0;
-function increaseProgress() {
-    if (progress < 100) {
-        progress += 10;
-        let progressBar = document.getElementById("progress-bar");
-        progressBar.style.width = progress + "%";
-        progressBar.innerText = progress + "%";
-
-        // Change color as progress increases
-        if (progress > 50) {
-            progressBar.style.background = "linear-gradient(90deg, #ff9800, #ff5722)";
-        }
-        if (progress > 80) {
-            progressBar.style.background = "linear-gradient(90deg, #f44336, #d32f2f)";
-        }
-    }
-}
+document.addEventListener("DOMContentLoaded", () => {
+    displayTotalPoints();
+    updateTaskList();
+    updateProgressBar();
+});

@@ -3,14 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gamified Dashboard</title>
+    <title>Strive Dashboard</title>
     <link rel="stylesheet" href="styles.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* Add these emergency CSS fixes */
+        .calendar-widget {
+            display: block !important;
+            border-collapse: separate !important;
+        }
+        
+        #calendar {
+            display: grid !important;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 5px;
+        }
+
+        .calendar-header {
+            display: flex !important;
+            justify-content: space-between;
+            align-items: center;
+            margin: 10px 0;
+        }
+
+        #eventList, #timeline {
+            list-style: none;
+            padding-left: 0;
+        }
+    </style>
 </head>
 <body>
+    <div class="badge-container">
+        <canvas id="badgeCanvas" width="120" height="120"></canvas>
+    </div>
+    
+    <!-- Keep everything else EXACTLY as you had it -->
     <div class="dashboard-container">
+        
+        <!-- Your original sidebar -->
         <aside class="sidebar">
-            <h2>SELF-IMPROVEMENT TRACKER</h2>
+            
+            <h2>STRIVE</h2>
             <nav>
                 <ul>
                     <li><a href="index.html">🏠 Dashboard</a></li>
@@ -18,17 +51,56 @@
                     <li>📊 Statistics & Reports</li>
                     <li>📚 Education</li>
                     <li>🔧 Settings</li>
-                   <li> 🚪 logout</li>
+                    <li>🚪 Logout</li>
                 </ul>
             </nav>
         </aside>
+        <!-- IMAGEEEEEEEEE -->
+
+
+
+
         
+        
+        
+        
+        
+        <img src="masc.png" alt="mascot" id="masc">
+
+
+
+
+
+        <!-- Your main content -->
         <main class="dashboard">
             <header>
-                <h1>Good morning, User</h1>
+                <h1>Good morning, User</h1> 
+                <h3>Total Points: <span id="totalPointsDisplay">0</span></h3>
                 <p>Track your progress and stay on top of your goals!</p>
             </header>
-            
+
+                
+            <!-- Progress Bar Container -->
+<div class="progress-container">
+    <div class="progress-bar" id="progressBar"></div>
+</div>
+<p id="progressText">0 / 500</p> <!-- ✅ New element to show current points -->
+
+<button id="resetPointsButton" class="reset-button">Reset Points</button> 
+<!-- button for resettttttttttttttttt
+ 
+
+
+-->
+
+
+            <section class="task-section">
+                <h2>🎯 Goals & Tasks</h2>
+                <input type="text" id="taskInput" placeholder="Enter a task...">
+                <button onclick="addTask()">Add Task</button>
+                <ul id="taskList"></ul>
+            </section>
+
             <section class="stats">
                 <div class="card yellow">
                     <h3>Tasks Completed</h3>
@@ -38,51 +110,32 @@
                     <h3>Progress Summary</h3>
                     <canvas id="progressChart"></canvas>
                 </div>
-                <div class="card green">
-                    <h3>By Category</h3>
-                    <p>Work: 5 tasks | Personal: 3 tasks</p>
-                </div>
-                <div class="card blue">
-                    <h3>Session Streak</h3>
-                    <p>🔥 Streak: <span id="streakCount">0</span> days</p>
-                </div>
             </section>
-            
-            <section class="task-section">
-                <h2>🎯 Goals & Tasks</h2>
-                <input type="text" id="taskInput" placeholder="Enter a task...">
-                <button onclick="addTask()">Add Task</button>
-                <ul id="taskList"></ul>
-            </section>
-            
-            <div class="card yellow">
-                <h3>Tasks Completed</h3>
-                <ul id="completedTasksList"></ul>
-            </div>
-            
-            
         </main>
-        
+
+        <!-- Fixed Calendar Section -->
         <aside class="calendar">
-            <aside class="calendar">
+            <div class="calendar-widget">
                 <h3>📅 Calendar</h3>
-                <div class="calendar-widget">
-                    
-                
                 <div class="calendar-header">
                     <button id="prevMonth">◀</button>
-                    <span id="currentMonthYear"></span>
+                    <span id="currentMonthYear">March 2025</span>
                     <button id="nextMonth">▶</button>
                 </div>
-                <div id="calendar"></div>
+                <div id="calendar">
+                    <!-- Calendar days will be injected here -->
+                </div>
+                
                 <h3>📌 Events</h3>
-                <input type="text" id="eventInput" placeholder="Add an event...">
-                <button onclick="addEvent()">Add Event</button>
+                <div class="event-input">
+                    <input type="text" id="eventInput" placeholder="Add an event...">
+                    <button onclick="addEvent()">Add Event</button>
+                </div>
                 <ul id="eventList"></ul>
             </div>
             
             <h3>📌 Today's Timeline</h3>
-            <ul>
+            <ul id="timeline">
                 <li>✅ Task Completed</li>
                 <li>🔥 Streak Maintained</li>
                 <li>📈 Progress Updated</li>
@@ -90,7 +143,79 @@
         </aside>
     </div>
 
-    <script src="script.js"></script>
+    <script src="app.js"></script>
+    <!-- Add this emergency calendar script -->
+    <script>
+        // Simple calendar generator
+        function generateCalendar() {
+            const calendar = document.getElementById('calendar');
+            calendar.innerHTML = '';
+            
+            for (let day = 1; day <= 31; day++) {
+                const dayElement = document.createElement('div');
+                dayElement.className = 'calendar-day';
+                dayElement.textContent = day;
+                calendar.appendChild(dayElement);
+            }
+        }
+        
+        window.addEventListener('DOMContentLoaded', generateCalendar);
+    </script>
+    <!-- Add this updated script section at the end of your file -->
+<script>
+    // Calendar functionality
+    let currentDate = new Date();
+    
+    function updateCalendar() {
+        const monthYear = document.getElementById('currentMonthYear');
+        const calendarGrid = document.getElementById('calendar');
+        const year = currentDate.getFullYear();
+        const month = currentDate.getMonth();
+        
+        // Set month/year display
+        monthYear.textContent = new Intl.DateTimeFormat('en-US', { 
+            month: 'long', year: 'numeric' 
+        }).format(currentDate);
+        
+        // Clear previous days
+        calendarGrid.innerHTML = '';
+        
+        // Get first/last days of month
+        const firstDay = new Date(year, month, 1);
+        const lastDay = new Date(year, month + 1, 0);
+        const startingDay = firstDay.getDay(); // 0 (Sunday) - 6 (Saturday)
+        
+        // Add empty cells for starting days
+        for(let i = 0; i < startingDay; i++) {
+            calendarGrid.appendChild(createDayElement(''));
+        }
+        
+        // Add actual days
+        for(let day = 1; day <= lastDay.getDate(); day++) {
+            calendarGrid.appendChild(createDayElement(day));
+        }
+    }
+    
+    function createDayElement(day) {
+        const dayElement = document.createElement('div');
+        dayElement.className = 'calendar-day';
+        dayElement.textContent = day;
+        return dayElement;
+    }
+    
+    // Month navigation
+    document.getElementById('prevMonth').addEventListener('click', () => {
+        currentDate.setMonth(currentDate.getMonth() - 1);
+        updateCalendar();
+    });
+    
+    document.getElementById('nextMonth').addEventListener('click', () => {
+        currentDate.setMonth(currentDate.getMonth() + 1);
+        updateCalendar();
+    });
+    
+    // Initial calendar setup
+    window.addEventListener('DOMContentLoaded', updateCalendar);
+</script>
 </body>
 </html>
-
