@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Statistics & Reports | Selfup</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Playfair+Display:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="stats.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <h2><i class="fas fa-chart-line"></i> Selfup</h2>
+            <nav>
+                <ul>
+                    <li><a href="index.html"><i class="fas fa-home"></i> Dashboard</a></li>
+                    <li><a href="schedule.html"><i class="fas fa-calendar-alt"></i> Schedule</a></li>
+                    <li class="active"><a href="stats.html"><i class="fas fa-chart-pie"></i> Statistics & Reports</a></li>
+                    <li><a href="dailyplanner.html"><i class="fas fa-tasks"></i> Planner</a></li>
+                    <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
+                    <li><a href="#"><i class="fas fa-sign-out-alt"></i> Log out</a></li>
+                </ul>
+            </nav>
+        </aside>
+        
+        <main class="stats-main">
+            <header class="stats-header">
+                <h1>Your Progress Dashboard</h1>
+                <div class="date-range">
+                    <select id="timePeriod">
+                        <option value="week">Last 7 Days</option>
+                        <option value="month">Last 30 Days</option>
+                        <option value="quarter">Last 3 Months</option>
+                        <option value="year">Last Year</option>
+                    </select>
+                </div>
+            </header>
+
+            <div class="stats-grid">
+                <!-- Progress Summary -->
+                <section class="stat-card wide">
+                    <div class="card-header">
+                        <h2><i class="fas fa-trophy"></i> Progress Summary</h2>
+                    </div>
+                    <div class="progress-bars">
+                        <div class="progress-item">
+                            <div class="progress-info">
+                                <span>Task Completion</span>
+                                <span class="progress-value">78%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 78%; background: #6c5ce7;"></div>
+                            </div>
+                        </div>
+                        <div class="progress-item">
+                            <div class="progress-info">
+                                <span>Habit Consistency</span>
+                                <span class="progress-value">65%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 65%; background: #00b894;"></div>
+                            </div>
+                        </div>
+                        <div class="progress-item">
+                            <div class="progress-info">
+                                <span>Goal Achievement</span>
+                                <span class="progress-value">42%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 42%; background: #fd79a8;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Streaks -->
+                <section class="stat-card">
+                    <div class="card-header">
+                        <h2><i class="fas fa-fire"></i> Current Streaks</h2>
+                    </div>
+                    <div class="streaks-container">
+                        <div class="streak-item">
+                            <div class="streak-icon" style="background: #ffeaa7;">
+                                <i class="fas fa-tasks" style="color: #fdcb6e;"></i>
+                            </div>
+                            <div class="streak-info">
+                                <span class="streak-name">Daily Planning</span>
+                                <span class="streak-days">14 days</span>
+                            </div>
+                        </div>
+                        <div class="streak-item">
+                            <div class="streak-icon" style="background: #a2d2ff;">
+                                <i class="fas fa-tint" style="color: #5fa8d3;"></i>
+                            </div>
+                            <div class="streak-info">
+                                <span class="streak-name">Hydration</span>
+                                <span class="streak-days">7 days</span>
+                            </div>
+                        </div>
+                        <div class="streak-item">
+                            <div class="streak-icon" style="background: #b2f2bb;">
+                                <i class="fas fa-running" style="color: #40c057;"></i>
+                            </div>
+                            <div class="streak-info">
+                                <span class="streak-name">Exercise</span>
+                                <span class="streak-days">5 days</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Task Completion Graph -->
+                <section class="stat-card wide">
+                    <div class="card-header">
+                        <h2><i class="fas fa-check-circle"></i> Task Completion</h2>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="taskChart"></canvas>
+                    </div>
+                </section>
+
+                <!-- Habit Tracking -->
+                <section class="stat-card">
+                    <div class="card-header">
+                        <h2><i class="fas fa-calendar-check"></i> Habit Tracking</h2>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="habitChart"></canvas>
+                    </div>
+                </section>
+
+                <!-- Productivity Trends -->
+                <section class="stat-card wide">
+                    <div class="card-header">
+                        <h2><i class="fas fa-chart-line"></i> Productivity Trends</h2>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="productivityChart"></canvas>
+                    </div>
+                </section>
+
+                <!-- Category Breakdown -->
+                <section class="stat-card">
+                    <div class="card-header">
+                        <h2><i class="fas fa-pie-chart"></i> Category Breakdown</h2>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="categoryChart"></canvas>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <script src="stats.js"></script>
+</body>
+</html>
