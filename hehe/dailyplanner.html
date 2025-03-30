@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Planner | Intelly</title>
+    <link rel="stylesheet" href="dailyplanner.css">
+</head>
+<body>
+    <div class="dashboard-container">
+       
+        <aside class="sidebar">
+            <h2>Selfup</h2>
+            <nav>
+                <ul>
+                    <li><a href="index.html">🏠 Dashboard</a></li>
+                    <li><a href="schedule.html">📅 Schedule</a></li>
+                    <li>📊 Statistics & Reports</li>
+                    <li><a href="dailyplanner.html" class="active">📚 Planner</a></li>
+                    <li>🔧 Settings</li>
+                    <li>🚪 Log out</li>
+                </ul>
+            </nav>
+        </aside>
+
+      
+        <main class="planner-main">
+            <div class="planner-container">
+                <div class="date-weather">
+                    <div class="date">
+                        <strong>Date:</strong> <input type="date" id="plannerDate">
+                    </div>
+                    <div class="weather">
+                        <strong>Weather:</strong> 
+                        <select id="weatherSelect">
+                            <option>☀️ Sunny</option>
+                            <option>⛅ Cloudy</option>
+                            <option>🌧️ Rainy</option>
+                            <option>❄️ Snowy</option>
+                            <option>🌪️ Windy</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="content">
+                    <div class="left-column">
+                        <div class="section">
+                            <h3 class="section-title">TO DO LIST</h3>
+                            <div class="todo-list" id="todoList">
+                                <div class="todo-item">
+                                    <input type="checkbox" class="todo-checkbox">
+                                    <input type="text" class="todo-input" placeholder="Add task...">
+                                    <button class="delete-btn">×</button>
+                                </div>
+                            </div>
+                            <button id="addTodoBtn" class="add-btn">+ Add Task</button>
+                        </div>
+                        
+                        <div class="section">
+                            <h3 class="section-title">SCHEDULE</h3>
+                            <div class="schedule" id="timeBlocks">
+                               
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="right-column">
+                        <div class="section">
+                            <h3 class="section-title">MEAL PLAN</h3>
+                            <div class="meal-section">
+                                <div class="meal-card">
+                                    <div class="meal-title">BREAKFAST</div>
+                                    <input type="text" class="meal-input" placeholder="What did you eat?">
+                                </div>
+                                <div class="meal-card">
+                                    <div class="meal-title">LUNCH</div>
+                                    <input type="text" class="meal-input" placeholder="What did you eat?">
+                                </div>
+                                <div class="meal-card">
+                                    <div class="meal-title">DINNER</div>
+                                    <input type="text" class="meal-input" placeholder="What did you eat?">
+                                </div>
+                                <div class="meal-card">
+                                    <div class="meal-title">SNACK</div>
+                                    <input type="text" class="meal-input" placeholder="What did you eat?">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="section">
+                            <h3 class="section-title">EXERCISE</h3>
+                            <input type="text" id="exerciseInput" placeholder="What exercise did you do today?">
+                        </div>
+                        
+                        <div class="section">
+                            <h3 class="section-title">WATER INTAKE</h3>
+                            <div class="water-intake" id="waterCups">
+                                
+                            </div>
+                        </div>
+                        
+                        <div class="section">
+                            <h3 class="section-title">NOTES</h3>
+                            <textarea id="notesInput" placeholder="Write your notes here..."></textarea>
+                        </div>
+                        
+                        <div class="section">
+                            <h3 class="section-title">FOR TOMORROW</h3>
+                            <textarea id="tomorrowInput" placeholder="What's planned for tomorrow?"></textarea>
+                        </div>
+                        
+                        <div class="section">
+                            <h3 class="section-title">Today, I'm thankful for...</h3>
+                            <div class="gratitude">
+                                <input type="text" id="gratitudeInput" placeholder="Write what you're grateful for today">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="dailyplanner.js"></script>
+</body>
+</html>
