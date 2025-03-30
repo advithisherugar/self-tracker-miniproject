@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Planner | Selfup</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Playfair+Display:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="dailyplanner.css">
+</head>
+<body>
+    <div class="planner-container">
+        <div class="planner-header">
+            <div class="header-content">
+                <h1><i class="fas fa-book-open"></i> Daily Planner</h1>
+                <div id="dateDisplay"></div>
+            </div>
+            <div id="saveStatus"><i class="fas fa-check"></i> Saved</div>
+        </div>
+
+        <div class="planner-content">
+            <!-- Left Column -->
+            <div class="planner-column">
+                <section class="planner-section">
+                    <div class="section-header">
+                        <h2><i class="far fa-clock"></i> Schedule</h2>
+                        <div class="section-actions">
+                            <button class="icon-btn" title="Add time block"><i class="fas fa-plus"></i></button>
+                        </div>
+                    </div>
+                    <div id="timeBlocks"></div>
+                </section>
+
+                <section class="planner-section">
+                    <div class="section-header">
+                        <h2><i class="fas fa-tasks"></i> Tasks</h2>
+                        <div class="section-actions">
+                            <button class="icon-btn add-btn" data-target="todoList" title="Add task">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div id="todoList"></div>
+                </section>
+            </div>
+
+            <!-- Right Column -->
+            <div class="planner-column">
+                <section class="planner-section">
+                    <div class="section-header">
+                        <h2><i class="fas fa-utensils"></i> Meals</h2>
+                        <div class="section-actions">
+                            <button class="icon-btn add-btn" data-target="mealsList" title="Add meal">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div id="mealsList"></div>
+                </section>
+
+                <section class="planner-section">
+                    <div class="section-header">
+                        <h2><i class="fas fa-running"></i> Exercise</h2>
+                        <div class="section-actions">
+                            <button class="icon-btn add-btn" data-target="exerciseList" title="Add exercise">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div id="exerciseList"></div>
+                </section>
+
+                <section class="planner-section">
+                    <div class="section-header">
+                        <h2><i class="far fa-sticky-note"></i> Notes</h2>
+                        <div class="section-actions">
+                            <button class="icon-btn add-btn" data-target="notesList" title="Add note">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div id="notesList"></div>
+                </section>
+
+                <section class="planner-section">
+                    <div class="section-header">
+                        <h2><i class="far fa-sun"></i> Tomorrow</h2>
+                        <div class="section-actions">
+                            <button class="icon-btn add-btn" data-target="tomorrowList" title="Add item">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div id="tomorrowList"></div>
+                </section>
+
+                <section class="planner-section">
+                    <div class="section-header">
+                        <h2><i class="fas fa-tint"></i> Hydration</h2>
+                        <div class="water-count" id="waterCount">0/8</div>
+                    </div>
+                    <div class="water-tracker" id="waterCups"></div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <script src="dailyplanner.js"></script>
+</body>
+</html>
