@@ -1,0 +1,164 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    background: #f9f9f9;
+}
+
+.dashboard-container {
+    display: flex;
+    width: 100%;
+}
+
+.sidebar {
+    background: #111;
+    color: white;
+    width: 250px;
+    padding: 20px;
+    min-height: 100vh;
+}
+
+.sidebar h2 {
+    color: #ff66b2;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar li {
+    padding: 10px;
+}
+
+.sidebar a {
+    color: white;
+    text-decoration: none;
+}
+
+.dashboard {
+    flex: 1;
+    padding: 20px;
+}
+
+header h1 {
+    margin: 0;
+}
+
+.stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    gap: 15px;
+}
+
+.card {
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.yellow { background: #ffe17a; }
+.pink { background: #ffb3d9; }
+.green { background: #a2d39b; }
+.blue { background: #b3d4ff; }
+
+
+
+
+
+.task-section input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.task-section button {
+    background: #ff66b2;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 5px;
+}
+
+.calendar {
+    width: 300px;
+    padding: 20px;
+    background: #f5f5f5;
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    background: #ff66b2;
+    padding: 10px;
+    color: white;
+    font-weight: bold;
+}
+
+.calendar-widget {
+    background: white;
+    padding: 10px;
+    margin-top: 10px;
+}
+
+.calendar-day {
+    display: inline-block;
+    width: 14%;
+    text-align: center;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.calendar-day:hover {
+    background: #ffccff;
+}
+
+#eventList {
+    list-style: none;
+    padding: 0;
+}
+.task-section {
+    margin-top: 20px;
+}
+
+#taskList, #completedTasksList {
+    list-style-type: none;
+    padding: 0;
+}
+
+#taskList li, #completedTasksList li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f9f9f9;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 5px;
+}
+
+#taskList li span, #completedTasksList li span {
+    flex-grow: 1;
+    cursor: pointer;
+}
+
+#taskList li button, #completedTasksList li button {
+    background: red;
+    color: white;
+    border: none;
+    padding: 5px;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+#taskList li button:first-of-type {
+    background: green;
+}
+    
+   

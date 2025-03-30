@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Statistics & Reports | Selfup</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Playfair+Display:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="stats.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar Navigation (same as planner) -->
+        <aside class="sidebar">
+            <h2><i class="fas fa-rocket"></i> Selfup</h2>
+            <nav>
+                <ul>
+                    <li><a href="index.html"><i class="fas fa-home"></i> Dashboard</a></li>
+                    <li><a href="schedule.html"><i class="fas fa-calendar-alt"></i> Schedule</a></li>
+                    <li class="active"><a href="stats.html"><i class="fas fa-chart-pie"></i> Statistics</a></li>
+                    <li><a href="dailyplanner.html"><i class="fas fa-tasks"></i> Planner</a></li>
+                    <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
+                    <li><a href="#"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="stats-main">
+            <div class="stats-header">
+                <div class="header-content">
+                    <h1><i class="fas fa-chart-line"></i> Statistics & Reports</h1>
+                    <div id="dateRange">Last 7 Days</div>
+                </div>
+                <div class="time-filters">
+                    <button class="time-filter active" data-range="7">Week</button>
+                    <button class="time-filter" data-range="30">Month</button>
+                    <button class="time-filter" data-range="90">Quarter</button>
+                </div>
+            </div>
+
+            <div class="stats-overview">
+                <div class="stats-card">
+                    <div class="card-value" id="tasksCompleted">0</div>
+                    <div class="card-label">Tasks Completed</div>
+                    <div class="card-progress">
+                        <div class="progress-bar" id="taskProgress"></div>
+                    </div>
+                </div>
+                <div class="stats-card">
+                    <div class="card-value" id="waterAverage">0/8</div>
+                    <div class="card-label">Avg. Water Intake</div>
+                    <div class="card-icon"><i class="fas fa-tint"></i></div>
+                </div>
+                <div class="stats-card">
+                    <div class="card-value" id="productivityScore">0</div>
+                    <div class="card-label">Productivity Score</div>
+                    <div class="card-icon"><i class="fas fa-bolt"></i></div>
+                </div>
+                <div class="stats-card">
+                    <div class="card-value" id="exerciseFrequency">0</div>
+                    <div class="card-label">Exercise Sessions</div>
+                    <div class="card-icon"><i class="fas fa-running"></i></div>
+                </div>
+            </div>
+
+            <div class="stats-content">
+                <div class="stats-column">
+                    <section class="stats-section">
+                        <div class="section-header">
+                            <h2><i class="fas fa-tasks"></i> Task Completion</h2>
+                        </div>
+                        <canvas id="taskChart"></canvas>
+                    </section>
+
+                    <section class="stats-section">
+                        <div class="section-header">
+                            <h2><i class="fas fa-calendar-alt"></i> Daily Productivity</h2>
+                        </div>
+                        <canvas id="productivityChart"></canvas>
+                    </section>
+                </div>
+
+                <div class="stats-column">
+                    <section class="stats-section">
+                        <div class="section-header">
+                            <h2><i class="fas fa-trophy"></i> Achievement Progress</h2>
+                        </div>
+                        <div class="achievement-tracker">
+                            <div class="achievement">
+                                <div class="achievement-info">
+                                    <h3>Task Master</h3>
+                                    <p>Complete 50 tasks</p>
+                                </div>
+                                <div class="achievement-progress">
+                                    <div class="progress-bar" id="taskMasterProgress"></div>
+                                    <span>0/50</span>
+                                </div>
+                            </div>
+                            <div class="achievement">
+                                <div class="achievement-info">
+                                    <h3>Hydration Hero</h3>
+                                    <p>Drink 8 glasses for 7 days straight</p>
+                                </div>
+                                <div class="achievement-progress">
+                                    <div class="progress-bar" id="hydrationProgress"></div>
+                                    <span>0/7</span>
+                                </div>
+                            </div>
+                            <div class="achievement">
+                                <div class="achievement-info">
+                                    <h3>Fitness Champion</h3>
+                                    <p>Complete 20 exercise sessions</p>
+                                </div>
+                                <div class="achievement-progress">
+                                    <div class="progress-bar" id="fitnessProgress"></div>
+                                    <span>0/20</span>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="stats-section">
+                        <div class="section-header">
+                            <h2><i class="fas fa-star"></i> Points Breakdown</h2>
+                        </div>
+                        <div class="points-system">
+                            <div class="points-category">
+                                <div class="category-name">Completed Tasks</div>
+                                <div class="category-points">+5 pts each</div>
+                            </div>
+                            <div class="points-category">
+                                <div class="category-name">Full Water Intake</div>
+                                <div class="category-points">+10 pts</div>
+                            </div>
+                            <div class="points-category">
+                                <div class="category-name">Exercise Session</div>
+                                <div class="category-points">+15 pts</div>
+                            </div>
+                            <div class="points-category">
+                                <div class="category-name">Note Taking</div>
+                                <div class="category-points">+2 pts each</div>
+                            </div>
+                            <div class="points-total">
+                                <div class="total-label">Total Points</div>
+                                <div class="total-value" id="totalPoints">0</div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="stats.js"></script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Calendar</title>
+    <link rel="stylesheet" href="schedule.css">
+    
+</head>
+<body>
+    <div class="dashboard-container">
+    <aside class="sidebar">
+        <h2>Selfup</h2>
+        <nav>
+            <ul>
+                <li><a href="index.html">🏠 Dashboard</a></li>
+                <li><a href="schedule.html">📅 Schedule</a></li>
+                <li>📊 Statistics & Reports</li>
+                <li><a href="dailyplanner.html">📚 Planner</a></li>
+                <li>🔧 Settings</li>
+                <li>🚪 Log out</li>
+            </ul>
+        </nav>
+    </aside>
+    </div>
+    <div class="calendar-container">
+        <div class="calendar-header">
+            <button id="prevMonth">&#10094;</button>
+            <h2 id="monthYear"></h2>
+            <button id="nextMonth">&#10095;</button>
+        </div>
+        <div class="calendar" id="calendar"></div>
+    </div>
+
+    <div id="eventModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Add Event</h2>
+            <input type="text" id="eventTitle" placeholder="Event Title">
+            <button id="saveEvent">Save</button>
+        </div>
+    </div>
+
+    <script src="schedule.js"></script>
+</body>
+</html>
